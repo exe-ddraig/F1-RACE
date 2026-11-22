@@ -10,35 +10,36 @@ int login(), signup();
 char c_user[50] = {'\0'};
 char y_n;
 
-void g_pass(char *pass) 
+void g_pass(char *pass)
 {
     int i = 0;
     char ch;
 
-    while (i < 50) 
-	{
+    while (1)
+    {
         ch = getch();
 
         if (ch == 13)
-		{
-            pass[i] = '\0';
-            printf("\n");
+        {
             break;
         }
-        else if (ch == 8) 
-		{
-            if (i > 0) 
-			{
+        else if (ch == 8)
+        {
+            if (i > 0)
+            {
                 i--;
                 printf("\b \b");
             }
         }
-        else 
-		{
+        else if (i < 49)
+        {
             pass[i++] = ch;
             printf("*");
         }
     }
+
+    pass[i] = '\0';
+    printf("\n");
 }
 
 int signup()
@@ -160,7 +161,7 @@ int login()
 
     while(1)
     {
-    	t_user[0] = {'\0'};
+    	t_user[0] = '\0';
     	int check;
         fflush(stdin);
         while(1)
@@ -848,6 +849,14 @@ int main()
 					}
 					
 					FILE *hs = fopen("games_log.txt", "r");
+
+					FILE *hs = fopen("games_log.txt", "r");
+					if (!hs)
+					{
+					    printf("\n\n\t\t\t\t\t\t\t No games played yet!\n");
+					    Sleep(1200);
+					    break;
+					}
 	
 					printf( "\n\n" );
 					while( fscanf( hs,"%[^,],%d ", t_p_name, &t_p_score ) == 2 )
@@ -922,6 +931,13 @@ int main()
 					int t_score;
 	
 					FILE *sh = fopen( "games_log.txt", "r" );
+
+					if (!sh)
+					{
+					    printf("\n\n\t\t\t\t\t\t\t No games played yet!\n");
+					    Sleep(1200);
+					    break;
+					}
 					
 					printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t  =================== YOUR GAME HISTORY ==================\n");
 					
