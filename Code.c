@@ -87,7 +87,7 @@ int signup()
 		}
 
 		rewind(fp);
-		while(fscanf(fp,"%[^,],%[^\n] ",f_user, f_pass) != EOF)
+		while(fscanf(fp,"%49[^,],%49[^\n] ",f_user, f_pass) == 2)
 		{
 			if (strcmp(t_user, f_user) == 0) 
 			{
@@ -162,7 +162,6 @@ int login()
     while(1)
     {
     	t_user[0] = '\0';
-    	int check;
         fflush(stdin);
         while(1)
 		{
@@ -197,7 +196,7 @@ int login()
         int found = 0;
         rewind(fp);
 
-        while(fscanf(fp,"%[^,],%[^\n] ",f_user,f_pass) != EOF)
+        while(fscanf(fp,"%49[^,],%49[^\n] ",f_user,f_pass) == 2)
         {
             if(strcmp(t_user,f_user) == 0)
             {
@@ -839,7 +838,7 @@ int main()
 					
 					char players[100][50], t_p_name[50];
 					int t_p_score, p_score[100];
-					int n_turn, f_flag, index, t_players=0;
+					int f_flag, index, t_players=0;
 					int temp_s;	char temp_n[50];
 					
 					for( int i = 0; i < 100; i++ )
@@ -847,8 +846,6 @@ int main()
 						players[i][0] = '\0' ;
 						p_score[i] = 0;
 					}
-					
-					FILE *hs = fopen("games_log.txt", "r");
 
 					FILE *hs = fopen("games_log.txt", "r");
 					if (!hs)
